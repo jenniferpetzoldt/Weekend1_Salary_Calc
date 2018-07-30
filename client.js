@@ -56,7 +56,7 @@ function totalCost() {
     let sum = 0;
     for (i = 0; i < salaries.length; i++) {
         sum += Number(salaries[i]);
-        $('.total').html('<p id="totalCost">Total Monthly Cost:' + sum.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) + '</p>');
+        $('.total').html('<p id="totalCost">Total Monthly Cost: ' + sum.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) + '</p>');
         if (sum > 20000) {
             $('#totalCost').css('color', 'red');
             $('#totalCost').css('font-weight', 'bold');
