@@ -8,7 +8,18 @@ function onReady() {
     $('.table').on('click', '#delete-btn', deleteRow);
 }
 
+class Employee {
+    constructor (firstNameIn, lastNameIn, idNumberIn, titleIn, annualSalaryIn) {
+        this.firstName = firstNameIn;
+        this.lastName = lastNameIn;
+        this.idNumber= idNumberIn;
+        this.title = titleIn;
+        this.annualSalary = annualSalaryIn;
+    }
+}
+
 let salaries = [];
+let employees = [];
 
 function appendDom() {
     let table = $('<table class="table"></table>');
@@ -31,24 +42,21 @@ function collectData() {
     let idNumberIn = $('#idNumber').val();
     let titleIn = $('#jobTitle').val();
     let annualSalaryIn = $('#annualSalary').val();
-
-    console.log('collecting data');
-
-    $('.table').append('<tr><td>' + firstNameIn + '</td><td>' + lastNameIn + '</td><td>' + idNumberIn + '</td><td>' + titleIn + '</td><td>' + annualSalaryIn + '</td><td><button id="delete-btn">Delete</button></td></tr>');
+    annualSalaryIn = Number(annualSalaryIn);
+    $('.table').append('<tr><td>' + firstNameIn + '</td><td>' + lastNameIn + '</td><td>' + idNumberIn + '</td><td>' + titleIn + '</td><td>' + annualSalaryIn.toLocaleString('en') + '</td><td><button id="delete-btn">Delete</button></td></tr>');
     salaries.push(annualSalaryIn);
+    employees.push(firstNameIn, lastNameIn, idNumberIn, titleIn, annualSalaryIn);
 }
 
 function deleteRow() {
     $(this).closest('tr').remove();
-    console.log('delete row');
 }
 
 function totalCost() {
     let sum = 0;
     for (i = 0; i < salaries.length; i++) {
         sum += Number(salaries[i]);
-        console.log(sum);
-        $('.total').html('<p id="totalCost">Total Monthly Cost: $' + sum + '</p>');
+        $('.total').html('<p id="totalCost">Total Monthly Cost:' + sum.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) + '</p>');
         if (sum > 20000) {
             $('#totalCost').css('color', 'red');
             $('#totalCost').css('font-weight', 'bold');
