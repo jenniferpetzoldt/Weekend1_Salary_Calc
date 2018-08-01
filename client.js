@@ -55,7 +55,7 @@ function deleteRow() {
 function totalCost() {
     let sum = 0;
     for (i = 0; i < salaries.length; i++) {
-        sum += Number(salaries[i]);
+        sum += Number(salaries[i] / 12);
         $('.total').html('<p id="totalCost">Total Monthly Cost: ' + sum.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) + '</p>');
         if (sum > 20000) {
             $('#totalCost').css('color', 'red');
